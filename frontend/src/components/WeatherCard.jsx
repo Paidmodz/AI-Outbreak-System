@@ -1,6 +1,7 @@
 import React, {
     useEffect,
-    useState
+    useState,
+    useCallback
 } from "react";
 
 import axios from "axios";
@@ -10,17 +11,12 @@ const WeatherCard = () => {
     const [weather, setWeather] =
         useState(null);
 
-    const [city, setCity] = useState("Guwahati");
+    const [city, setCity] =
+        useState("Guwahati");
 
-    useEffect(() => {
+    // Fetch Weather
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-
-    fetchWeather();
-
-}, []);
-
-    const fetchWeather = async () => {
+    const fetchWeather = useCallback(async () => {
 
         try {
 
@@ -42,7 +38,15 @@ const WeatherCard = () => {
 
         }
 
-    };
+    }, [city]);
+
+    // Auto Fetch on Load
+
+    useEffect(() => {
+
+        fetchWeather();
+
+    }, [fetchWeather]);
 
     return (
 
