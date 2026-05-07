@@ -14,9 +14,11 @@ const WeatherCard = () => {
 
     useEffect(() => {
 
-        fetchWeather();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
 
-    }, []);
+    fetchWeather();
+
+}, []);
 
     const fetchWeather = async () => {
 
