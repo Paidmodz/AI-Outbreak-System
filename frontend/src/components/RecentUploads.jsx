@@ -22,7 +22,7 @@ const RecentUploads = () => {
 
             const response =
                 await axios.get(
-                    "http://localhost:5001/stats"
+                    "https://ai-outbreak-system.onrender.com/stats"
                 );
 
             setUploads(

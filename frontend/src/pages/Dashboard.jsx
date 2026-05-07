@@ -12,6 +12,7 @@ import RecentUploads from "../components/RecentUploads";
 import WeatherCard from "../components/WeatherCard";
 import AlertBanner from "../components/AlertBanner";
 import TrendChart from "../components/TrendChart";
+import AIInsights from "../components/AIInsights";
 
 const Dashboard = () => {
 
@@ -41,7 +42,7 @@ const Dashboard = () => {
         try {
 
             const response = await axios.post(
-                "http://localhost:5001/predict",
+                "https://ai-outbreak-system.onrender.com/predict",
                 formData
             );
 
@@ -109,6 +110,10 @@ const Dashboard = () => {
                 {/* Trend Chart */}
 
                 <TrendChart />
+
+                {/* AI Insights */}
+
+                <AIInsights />
 
                 {/* Prediction Form */}
 

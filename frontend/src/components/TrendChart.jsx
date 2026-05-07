@@ -32,7 +32,7 @@ const TrendChart = () => {
 
             const response =
                 await axios.get(
-                    "http://localhost:5001/history"
+                    "https://ai-outbreak-system.onrender.com/history"
                 );
 
             const formatted =

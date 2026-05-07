@@ -21,6 +21,7 @@ import Analytics from "./pages/Analytics";
 import Heatmap from "./pages/Heatmap";
 import Upload from "./pages/Upload";
 import Login from "./pages/Login";
+import Signup from "./pages/Signup";
 import History from "./pages/History";
 import ChatBot from "./components/ChatBot";
 
@@ -50,6 +51,10 @@ function Layout() {
             path="/login"
             element={<Login />}
           />
+          <Route
+             path="/signup"
+             element={<Signup />}
+         />
 
           {/* Protected Routes */}
 

@@ -31,7 +31,7 @@ const Upload = () => {
         try {
 
             const response = await axios.post(
-                "http://localhost:5001/upload",
+                "https://ai-outbreak-system.onrender.com/upload",
                 formData
             );
 

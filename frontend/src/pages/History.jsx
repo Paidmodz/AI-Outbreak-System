@@ -25,7 +25,7 @@ const History = () => {
 
             const response =
                 await axios.get(
-                    "http://localhost:5001/history"
+                    "https://ai-outbreak-system.onrender.com/history"
                 );
 
             setHistory(response.data);
