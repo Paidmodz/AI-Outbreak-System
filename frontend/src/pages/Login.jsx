@@ -2,7 +2,10 @@ import React, { useState } from "react";
 
 import axios from "axios";
 
-import { useNavigate } from "react-router-dom";
+import {
+    Link,
+    useNavigate
+} from "react-router-dom";
 
 const Login = () => {
 
@@ -52,11 +55,22 @@ const Login = () => {
             setMessage(response.data.message);
 
             // Redirect to dashboard
-            navigate("/dashboard");
+            setTimeout(() => {
+
+                navigate("/dashboard");
+
+            }, 1000);
 
         } catch (error) {
 
             console.log(error);
+
+            setMessage(
+
+                error.response?.data?.message ||
+                "Login Failed"
+
+            );
 
         }
 
@@ -82,7 +96,8 @@ const Login = () => {
                     name="email"
                     placeholder="Email"
                     onChange={handleChange}
-                    className="w-full p-4 rounded-xl bg-[#1B2A41] text-white mb-6"
+                    className="w-full p-4 rounded-xl bg-[#1B2A41] text-white mb-6 outline-none"
+                    required
                 />
 
                 <input
@@ -90,12 +105,13 @@ const Login = () => {
                     name="password"
                     placeholder="Password"
                     onChange={handleChange}
-                    className="w-full p-4 rounded-xl bg-[#1B2A41] text-white mb-6"
+                    className="w-full p-4 rounded-xl bg-[#1B2A41] text-white mb-6 outline-none"
+                    required
                 />
 
                 <button
                     type="submit"
-                    className="w-full bg-cyan-500 hover:bg-cyan-600 p-4 rounded-xl font-bold text-white"
+                    className="w-full bg-cyan-500 hover:bg-cyan-600 transition-all duration-300 p-4 rounded-xl font-bold text-white"
                 >
 
                     Login
@@ -104,13 +120,28 @@ const Login = () => {
 
                 {message && (
 
-                    <p className="text-green-400 mt-6 text-center">
+                    <p className="text-center mt-6 text-green-400">
 
                         {message}
 
                     </p>
 
                 )}
+
+                <p className="text-gray-400 mt-6 text-center">
+
+                    Don't have an account?
+
+                    <Link
+                        to="/signup"
+                        className="text-cyan-400 ml-2 hover:underline"
+                    >
+
+                        Signup
+
+                    </Link>
+
+                </p>
 
             </form>
 

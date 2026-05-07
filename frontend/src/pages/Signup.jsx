@@ -1,24 +1,22 @@
-import React, {
-    useState
-} from "react";
+import React, { useState } from "react";
 
 import axios from "axios";
 
+import { Link, useNavigate } from "react-router-dom";
+
 const Signup = () => {
 
-    const [formData, setFormData] =
-        useState({
+    const navigate = useNavigate();
 
-            name: "",
+    const [formData, setFormData] = useState({
 
-            email: "",
+        name: "",
+        email: "",
+        password: ""
 
-            password: ""
+    });
 
-        });
-
-    const [message, setMessage] =
-        useState("");
+    const [message, setMessage] = useState("");
 
     const handleChange = (e) => {
 
@@ -26,8 +24,7 @@ const Signup = () => {
 
             ...formData,
 
-            [e.target.name]:
-                e.target.value
+            [e.target.name]: e.target.value
 
         });
 
@@ -39,22 +36,33 @@ const Signup = () => {
 
         try {
 
-            const response =
-                await axios.post(
+            const response = await axios.post(
 
-                    "https://ai-outbreak-system.onrender.com/auth/signup",
+                "https://ai-outbreak-system.onrender.com/auth/signup",
 
-                    formData
+                formData
 
-                );
-
-            setMessage(
-                response.data.message
             );
+
+            setMessage(response.data.message);
+
+            // Redirect to login page
+            setTimeout(() => {
+
+                navigate("/login");
+
+            }, 1500);
 
         } catch (error) {
 
             console.log(error);
+
+            setMessage(
+
+                error.response?.data?.message ||
+                "Signup Failed"
+
+            );
 
         }
 
@@ -80,7 +88,8 @@ const Signup = () => {
                     name="name"
                     placeholder="Name"
                     onChange={handleChange}
-                    className="w-full p-4 rounded-xl bg-[#1B2A41] text-white mb-6"
+                    className="w-full p-4 rounded-xl bg-[#1B2A41] text-white mb-6 outline-none"
+                    required
                 />
 
                 <input
@@ -88,7 +97,8 @@ const Signup = () => {
                     name="email"
                     placeholder="Email"
                     onChange={handleChange}
-                    className="w-full p-4 rounded-xl bg-[#1B2A41] text-white mb-6"
+                    className="w-full p-4 rounded-xl bg-[#1B2A41] text-white mb-6 outline-none"
+                    required
                 />
 
                 <input
@@ -96,12 +106,13 @@ const Signup = () => {
                     name="password"
                     placeholder="Password"
                     onChange={handleChange}
-                    className="w-full p-4 rounded-xl bg-[#1B2A41] text-white mb-6"
+                    className="w-full p-4 rounded-xl bg-[#1B2A41] text-white mb-6 outline-none"
+                    required
                 />
 
                 <button
                     type="submit"
-                    className="w-full bg-cyan-500 hover:bg-cyan-600 p-4 rounded-xl font-bold text-white"
+                    className="w-full bg-cyan-500 hover:bg-cyan-600 transition-all duration-300 p-4 rounded-xl font-bold text-white"
                 >
 
                     Signup
@@ -110,7 +121,7 @@ const Signup = () => {
 
                 {message && (
 
-                    <p className="text-green-400 mt-6 text-center">
+                    <p className="text-center mt-6 text-green-400">
 
                         {message}
 
@@ -120,13 +131,16 @@ const Signup = () => {
 
                 <p className="text-gray-400 mt-6 text-center">
 
-                    Already have an account?
+                    Already a user?
 
-                    <span className="text-cyan-400 cursor-pointer ml-2">
+                    <Link
+                        to="/login"
+                        className="text-cyan-400 ml-2 hover:underline"
+                    >
 
                         Login
 
-                    </span>
+                    </Link>
 
                 </p>
 
