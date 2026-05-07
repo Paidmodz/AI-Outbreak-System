@@ -33,7 +33,8 @@ function Layout() {
 
   // Login page pe sidebar hide
   const hideSidebar =
-    location.pathname === "/login";
+    location.pathname === "/login" ||
+    location.pathname === "/signup";
 
   return (
 
