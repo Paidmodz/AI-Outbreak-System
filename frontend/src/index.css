@@ -1,0 +1,58 @@
+@import "leaflet/dist/leaflet.css";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+
+  margin: 0;
+
+  padding: 0;
+
+  background:
+    linear-gradient(
+      to bottom right,
+      #020617,
+      #071028,
+      #0F172A
+    );
+
+  font-family: Arial, sans-serif;
+
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: cyan;
+  border-radius: 10px;
+}
+
+@keyframes fadeIn {
+
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+}
+
+.animate-fadeIn {
+
+  animation: fadeIn 0.3s ease;
+
+}
+
+.glow-card {
+
+  box-shadow:
+    0 0 20px rgba(6,182,212,0.3);
+
+}
