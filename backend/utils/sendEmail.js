@@ -16,10 +16,10 @@ const sendEmail = async (
                 auth: {
 
                     user:
-                        "YOUR_GMAIL@gmail.com",
+                        "arshidnice1blp@gmail.com",
 
                     pass:
-                        "YOUR_APP_PASSWORD"
+                        "keiz bfnw pmng srma"
 
                 }
 
@@ -28,10 +28,10 @@ const sendEmail = async (
         const mailOptions = {
 
             from:
-                "YOUR_GMAIL@gmail.com",
+                "arshidnice1blp@gmail.com",
 
             to:
-                "YOUR_RECEIVER@gmail.com",
+                "kidzhub2004@gmail.com",
 
             subject,
 

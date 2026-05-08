@@ -21,7 +21,7 @@ const historyRoute = require("./routes/history");
 const app = express();
 
 
-// CORS FIX
+// CORS
 app.use(cors({
 
     origin: "*",
@@ -43,14 +43,7 @@ app.use(express.json());
 
 // MongoDB Connection
 mongoose.connect(
-
-    process.env.MONGO_URI,
-
-    {
-        useNewUrlParser: true,
-        useUnifiedTopology: true
-    }
-
+    process.env.MONGO_URI
 )
 
 .then(() => {
@@ -61,7 +54,10 @@ mongoose.connect(
 
 .catch((err) => {
 
-    console.log("MongoDB Error:", err);
+    console.log(
+        "MongoDB Error:",
+        err
+    );
 
 });
 
@@ -83,13 +79,16 @@ app.use("/history", historyRoute);
 // Home Route
 app.get("/", (req, res) => {
 
-    res.send("Backend Running Successfully");
+    res.send(
+        "Backend Running Successfully"
+    );
 
 });
 
 
 // Server Port
-const PORT = process.env.PORT || 5001;
+const PORT =
+    process.env.PORT || 5001;
 
 app.listen(PORT, () => {
 
