@@ -1,80 +1,78 @@
 const express = require("express");
+
 const router = express.Router();
 
-const Prediction = require("../models/Prediction");
-const sendEmail = require("../utils/sendEmail");
+const Prediction =
+    require("../models/Prediction");
 
-const axios = require("axios");
 
+// Prediction Route
 router.post("/", async (req, res) => {
 
     try {
 
-        const response = await axios.post(
-            "http://127.0.0.1:5000/predict",
-            req.body
-        );
+        const {
 
-        // Prediction result
-        const predictionResult =
-            response.data.prediction;
+            confirmed,
 
-        // Save prediction in MongoDB
-        await Prediction.create({
+            deaths,
 
-            confirmed: req.body.confirmed,
+            recovered,
 
-            deaths: req.body.deaths,
+            active,
 
-            recovered: req.body.recovered,
+            population
 
-            active: req.body.active,
+        } = req.body;
 
-            population: req.body.population,
+        // Basic AI Logic
+        let prediction = "LOW RISK";
 
-            result: predictionResult
-
-        });
-
-        // HIGH RISK EMAIL ALERT
         if (
-            predictionResult === "HIGH RISK"
+
+            confirmed > 100000 ||
+
+            deaths > 5000 ||
+
+            active > 50000
+
         ) {
 
-            await sendEmail(
-
-                "⚠ HIGH RISK OUTBREAK ALERT",
-
-                `
-AI Outbreak System detected a HIGH RISK outbreak.
-
-Confirmed Cases:
-${req.body.confirmed}
-
-Deaths:
-${req.body.deaths}
-
-Population:
-${req.body.population}
-
-Immediate monitoring required.
-                `
-            );
+            prediction = "HIGH RISK";
 
         }
 
-        // Final response
+        // Save prediction
+        await Prediction.create({
+
+            confirmed,
+
+            deaths,
+
+            recovered,
+
+            active,
+
+            population,
+
+            result: prediction
+
+        });
+
         res.json({
 
-            prediction: predictionResult
+            prediction
 
         });
 
     } catch (error) {
 
+        console.log(error);
+
         res.status(500).json({
 
-            error: error.message
+            message:
+                "Prediction Failed"
 
         });
 
