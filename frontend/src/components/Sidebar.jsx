@@ -24,7 +24,7 @@ const Sidebar = () => {
 
     return (
 
-        <div className="w-64 min-h-screen bg-[#ffffff] p-6">
+        <div className="w-64 min-h-screen bg-[#0B1727] p-6">
 
             <h1 className="text-3xl font-bold text-cyan-400 mb-10">
 
